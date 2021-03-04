@@ -3,7 +3,9 @@ package com.example.myfirstappcompose
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -19,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MyApp {
-                Greeting("Leo")
+                MyScreenContent()
             }
         }
     }
@@ -39,10 +41,20 @@ fun Greeting(name: String) {
     Text(text = "Hello $name!", modifier = Modifier.padding(24.dp))
 }
 
+@Composable
+fun MyScreenContent(names: List<String> = listOf("Leo", "Julia", "Lula", "Americo")) {
+    Column {
+        for (name in names) {
+            Greeting(name = name)
+            Divider(color = Color.Black)
+        }
+    }
+}
+
 @Preview("Leo")
 @Composable
 fun DefaultPreview() {
     MyApp {
-        Greeting("Leo")
+        MyScreenContent()
     }
 }
